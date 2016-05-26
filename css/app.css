@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+
+h3 {
+ text-align: center;	
+}
+
+.canvas-container{
+  width:35%;
+  margin: auto;
+}
+
+
+canvas {
+  margin: auto;border: 1px solid black;
+}
+
+.hidden {
+	display: none;
+}
