@@ -2,8 +2,20 @@
     box-sizing: border-box;
 }
 
-h3 {
+body {
+ background-color: #ECECEC;		
+}
+
+.header {
+ height: 6rem;
+}
+
+.header p{
+ font-family: 'Bree Serif', serif;
  text-align: center;	
+ font-size: 1.8rem;
+ padding:1rem;	
+ color: #3D4F6B;
 }
 
 .canvas-container{
@@ -13,7 +25,8 @@ h3 {
 
 
 canvas {
-  margin: auto;border: 1px solid black;
+  margin: auto;
+  /*border: 1px solid black;*/
 }
 
 .hidden {

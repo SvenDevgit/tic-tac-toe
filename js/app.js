@@ -10,7 +10,8 @@ var board = {
    yTo: 150,
    value : null,
    column : 1,
-   row : 1
+   row : 1,
+   color: '#FF0000'
             },
   square2 : { 
    xFrom: 150, 
@@ -19,7 +20,8 @@ var board = {
    yTo: 150,
    value: null,
    column : 2,
-   row : 1
+   row : 1,
+   color: '#F38585'
             },  
   square3 : { 
    xFrom: 300, 
@@ -28,7 +30,8 @@ var board = {
    yTo: 150,
    value: null,
    column : 3,
-   row : 1
+   row : 1,
+   color: '#FF0000'
             },
   square4 : { 
    xFrom: 0, 
@@ -37,7 +40,8 @@ var board = {
    yTo: 300,
    value: null,
    column : 1,
-   row : 2
+   row : 2,
+   color: '#F38585'
             },  
   square5 : { 
    xFrom: 150, 
@@ -46,7 +50,8 @@ var board = {
    yTo: 300,
    value: null,
    column : 2,
-   row : 2
+   row : 2,
+   color: '#FF0000'
             },
   square6 : { 
    xFrom: 300, 
@@ -55,7 +60,8 @@ var board = {
    yTo: 300,
    value: null,
    column : 2,
-   row : 3
+   row : 3,
+   color: '#F38585'
             },  
   square7 : { 
    xFrom: 0, 
@@ -64,7 +70,8 @@ var board = {
    yTo: 450,
    value: null,
    row : 3,
-   column : 1
+   column : 1,
+   color: '#FF0000'
             },
   square8 : { 
    xFrom: 150, 
@@ -73,7 +80,8 @@ var board = {
    yTo: 450,
    value: null,
    column : 2,
-   row : 3
+   row : 3,
+   color: '#F38585'
             },  
   square9 : { 
    xFrom: 300, 
@@ -82,7 +90,8 @@ var board = {
    yTo: 450,
    value: null,
    column : 3,
-   row : 3
+   row : 3,
+   color: '#FF0000'
             }                                                      
 };
 
@@ -102,7 +111,8 @@ $(function(){
        playGame(getClickedSquare(mousePos));
     })
     // drwaw the tic tac toe board
-    drawBoard();    
+    //drawBoard();   
+    colorCanvasShapes(); 
 });
 
 function canvasClicked(mousePos){
@@ -122,6 +132,8 @@ function getMousePos(canvas, evt) {
 
 function drawCircle(square){
   ctx.beginPath();
+  ctx.strokeStyle='#ECECEC';
+  ctx.lineWidth=5;
   ctx.arc(square.xFrom + 75, square.yFrom + 75,60,0,2*Math.PI);
   ctx.stroke();
 }
@@ -141,8 +153,10 @@ function drawSquare(vXf, vYf, vXt, vYt){
 }
 
 function drawX(square){
-  drawLine(square.xFrom, square.yFrom, square.xTo, square.yTo);
-  drawLine(square.xFrom, square.yTo, square.xTo, square.yFrom);
+  ctx.strokeStyle='#ECECEC';
+  ctx.lineWidth=5;
+  drawLine(square.xFrom+15, square.yFrom+15, square.xTo-15, square.yTo-15);
+  drawLine(square.xFrom+15, square.yTo-15, square.xTo-15, square.yFrom+15);
 }
 
 function drawBoard(){
@@ -178,13 +192,15 @@ function playGame(square){
   if (checkPlayed() == 'XXX' || checkPlayed() == 'OOO'){
     alert(checkPlayed().substr(0,1) + ' won the Game');
     ctx.clearRect(0,0,450,450);
-    drawBoard();
+    //drawBoard();
+    colorCanvasShapes(); 
     newGame();
   }
   if (gameState.moves == 9){
     alert('game over');
     ctx.clearRect(0,0,450,450);
-    drawBoard();
+    //drawBoard();
+    colorCanvasShapes(); 
     newGame();
   }
 }
@@ -234,4 +250,23 @@ function newGame(){
   }  
   gameState.moves = 0;
   gameState.played = 'N';
+}
+
+function colorSquare(square){
+  ctx.fillStyle = square.color;
+  ctx.fillRect(square.xFrom, square.yFrom, square.xTo-square.xFrom , square.yTo-square.yFrom);
+}  
+
+function setSquareText(){
+  ctx.font = '30px Arial';
+  ctx.strokeText('Hello World',10,50);
+}
+
+function colorCanvasShapes(){
+    var square;
+    var fillstyle;
+    for (let prop in board) {
+      square = board[prop];
+      colorSquare(square);
+    }
 }
